@@ -73,3 +73,13 @@ nav a:focus {
 	top: 0%;
 	opacity: 1;
 }
+
+.gallery-flex-item{
+	flex-basis: 25%;
+	width: 395px;
+}
+
+.gallery-flex-item img{
+	height: auto;
+	width: 100%;
+}
