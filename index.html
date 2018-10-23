@@ -146,9 +146,9 @@
 
 <section class="mbr-gallery mbr-slider-carousel">
 
-    <div class="row justify-content-md-center">
+    <div class="row justify-content-md-center content">
         <h1 class="mbr-section-title mbr-bold pb-3 mbr-fonts-style display-1" style="color:#000000;font-weight: 500;">
-            Flex Gallery with Drag and drop items</h1>
+            Flex Gallery with Drag and Drop</h1>
             </div>
 
     <div>
@@ -304,26 +304,4 @@
   
   
 </body>
-
-<script>
-        function allowDrop(ev) {
-            ev.preventDefault();
-        }
-        
-        function drag(ev) {
-            ev.dataTransfer.setData("text", ev.target.parentElement.id);
-        }
-        
-        function drop(ev) {
-            ev.preventDefault();
-            var data = ev.dataTransfer.getData("text");
-            var target = ev.target.parentElement;
-            var targetImg = target.getElementsByTagName("img")[0];
-            var source = document.getElementById(data);
-            var sourceImg = source.getElementsByTagName("img")[0];
-            target.appendChild(sourceImg);
-            source.appendChild(targetImg);
-        }
-        </script>
-
 </html>
