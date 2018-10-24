@@ -74,8 +74,14 @@ nav a:focus {
 	opacity: 1;
 }
 
+.gallery-flex-container{
+	justify-content:center;
+	display : inline-flex; 
+	flex-wrap:wrap;
+}
+
 .gallery-flex-item{
-	flex-basis: 25%;
+	
 	width: 395px;
 }
 
