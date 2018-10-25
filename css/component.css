@@ -81,11 +81,18 @@ nav a:focus {
 }
 
 .gallery-flex-item{
-	
-	width: 395px;
+	flex-basis: 350px;
+	flex-shrink: 1;
+	flex-grow: 1;
 }
 
 .gallery-flex-item img{
 	height: auto;
 	width: 100%;
+}
+
+@media only screen and (max-width: 700px) {
+    .gallery-flex-item{ 
+        flex-basis: 250px;
+    }
 }
