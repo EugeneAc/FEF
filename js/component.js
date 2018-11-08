@@ -1,15 +1,7 @@
-
-        function allowDrop(ev) {
-            ev.preventDefault();
-        }
-        
-        function drag(ev) {
-            ev.dataTransfer.setData("text", ev.target.parentElement.id);
-        }
         
         function drop(ev) {
             ev.preventDefault();
-            var data = ev.dataTransfer.getData("text");
+            var data = ev.originalEvent.dataTransfer.getData("text");
             var target = ev.target.parentElement;
             var targetImg = target.getElementsByTagName("img")[0];
             var source = document.getElementById(data);
@@ -17,3 +9,13 @@
             target.appendChild(sourceImg);
             source.appendChild(targetImg);
         }
+
+        $(".gallery-flex-item").on('dragover', function(ev){
+            ev.preventDefault();
+        })
+        .on('dragstart', function(ev){
+            ev.originalEvent.dataTransfer.setData("text", ev.target.parentElement.id);
+        })
+        .on ('drop', function(ev){
+            drop(ev);
+        });
