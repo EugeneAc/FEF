@@ -1,27 +1,4 @@
-
-function drop(ev) {
-    ev.preventDefault();
-    var data = ev.originalEvent.dataTransfer.getData("text");
-    var target = ev.target.parentElement;
-    var targetImg = target.getElementsByTagName("img")[0];
-    var source = document.getElementById(data);
-    var sourceImg = source.getElementsByTagName("img")[0];
-    target.appendChild(sourceImg);
-    source.appendChild(targetImg);
-}
-
-$(".gallery-flex-item").on('dragover', function (ev) {
-    ev.preventDefault();
-})
-    .on('dragstart', function (ev) {
-        ev.originalEvent.dataTransfer.setData("text", ev.target.parentElement.id);
-    })
-    .on('drop', function (ev) {
-        drop(ev);
-    });
-
-
-    // Youtube related functinos
+// Youtube related functinos
 
     
 function getJSONData(yourUrl) {
@@ -76,7 +53,7 @@ function showVideoListChannel(channelid, writediv, maxnumbervideos, apikey) {
         var videoinfo = JSON.parse(vid);
         var videos = videoinfo.items;
         var videocount = videoinfo.pageInfo.totalResults;
-        var content = "<div style='height:600px;overflow-y:auto;'>";
+        var content = "<div class='video-gallery'>";
         for (var i = 0; i < videos.length - 1; i++) {
             var videoid = videos[i].id.videoId;
             var videotitle = videos[i].snippet.title;

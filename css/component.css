@@ -96,8 +96,13 @@ nav a:focus {
     opacity: .75;
 }
 
+.video-gallery{
+	margin: 10px;
+}
+
 @media only screen and (max-width: 700px) {
     .gallery-flex-item{ 
         flex-basis: 250px;
     }
 }
+
