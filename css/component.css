@@ -92,6 +92,11 @@ nav a:focus {
 	width: 100%;
 }
 
+.gallery-flex-item iframe{
+	height: 215px;
+	width: 100%;
+}
+
 .gallery-flex-item img:hover {
     opacity: .75;
 }

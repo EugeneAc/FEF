@@ -11,40 +11,6 @@ function getJSONData(yourUrl) {
     }
     return Httpreq.responseText;
 }
-function showVideoList(username, writediv, maxnumbervideos, apikey) {
-    try {
-        document.getElementById(writediv).innerHTML = "";
-        var keyinfo = JSON.parse(getJSONData("https://www.googleapis.com/youtube/v3/channels?part=snippet&forUsername=" + username + "&key=" + apikey));
-        var userid = keyinfo.items[0].id;
-        var channeltitle = keyinfo.items[0].snippet.title;
-        var channeldescription = keyinfo.items[0].snippet.description;
-        var channelthumbnail = keyinfo.items[0].snippet.thumbnails.default.url; // default, medium or high
-        //channel header
-        document.getElementById(writediv).innerHTML += "<div style='width:100%;min-height:90px;'>"
-            + "<a href='https://www.youtube.com/user/" + username + "' target='_blank'>"
-            + "<img src='" + channelthumbnail + "' style='border:none;float:left;margin-right:10px;' alt='" + channeltitle + "' title='" + channeltitle + "' /></a>"
-            + "<div style='width:100%;text-align:center;'><h1><a href='https://www.youtube.com/user/" + username + "' target='_blank'>" + channeltitle + "</a></h1>" + channeldescription + "</div>"
-            + "</div>";
-        var videoinfo = JSON.parse(getJSONData("https://www.googleapis.com/youtube/v3/search?order=date&part=snippet&channelId=" + userid + "&maxResults=" + maxnumbervideos + "&key=" + apikey));
-        var videos = videoinfo.items;
-        var videocount = videoinfo.pageInfo.totalResults;
-        // video listing
-        for (var i = 0; i < videos.length; i++) {
-            var videoid = videos[i].id.videoId;
-            var videotitle = videos[i].snippet.title;
-            var videodescription = videos[i].snippet.description;
-            var videodate = videos[i].snippet.publishedAt; // date time published
-            var videothumbnail = videos[i].snippet.thumbnails.default.url; // default, medium or high
-            document.getElementById(writediv).innerHTML += "<hr /><div style='width:100%;min-height:90px;'>"
-                + "<a href='https://www.youtube.com/watch?v=" + videoid + "' target='_blank'>"
-                + "<img src='" + videothumbnail + "' style='border:none;float:left;margin-right:10px;' alt='" + videotitle + "' title='" + videotitle + "' /></a>"
-                + "<h3><a href='https://www.youtube.com/watch?v=" + videoid + "' target='_blank'>" + videotitle + "</a></h3>" + videodescription + ""
-                + "</div>";
-        }
-    } catch (ex) {
-        alert(ex.message);
-    }
-}
 
 function showVideoListChannel(channelid, writediv, maxnumbervideos, apikey) {
     try {
@@ -53,7 +19,7 @@ function showVideoListChannel(channelid, writediv, maxnumbervideos, apikey) {
         var videoinfo = JSON.parse(vid);
         var videos = videoinfo.items;
         var videocount = videoinfo.pageInfo.totalResults;
-        var content = "<div class='video-gallery'>";
+        var content = "<div class='video-gallery gallery-flex-container'>";
         for (var i = 0; i < videos.length - 1; i++) {
             var videoid = videos[i].id.videoId;
             var videotitle = videos[i].snippet.title;
@@ -72,11 +38,9 @@ function showVideoListChannel(channelid, writediv, maxnumbervideos, apikey) {
                 newdate = newdate.getMonth() + 1 + "/" + newdate.getDate() + "/" + newdate.getFullYear() + " " + newdate.getHours() + ":" + min + " AM";
             }
             var videothumbnail = videos[i].snippet.thumbnails.default.url; // default, medium or high
-            content += "<hr /><div style='width:100%;min-height:90px;'>"
-                + "<a href='https://www.youtube.com/watch?v=" + videoid + "' target='_blank'>"
-                + "<img src='" + videothumbnail + "' style='border:none;float:left;margin-right:10px;' alt='" + videotitle + "' title='" + videotitle + "' /></a>"
-                + "<h3><a href='https://www.youtube.com/watch?v=" + videoid + "' target='_blank'>" + videotitle + "</a></h3>" + videodescription + "<br />"
-                + "<span style='color:#738AAD;font-size:Small;'>" + newdate + "</span>"
+            content += "<div class='gallery-flex-item'>"
+                + "<iframe id='player" + i + "' src='https://www.youtube.com/embed/" + videoid + "?enablejsapi=1&origin=https://qwerty11aa.github.io/FEF/' frameborder='0' allow='picture-in-picture;'>"
+                + "</iframe>"
                 + "</div>";
         }
         content += "</div>";
@@ -85,3 +49,18 @@ function showVideoListChannel(channelid, writediv, maxnumbervideos, apikey) {
         alert(ex.message);
     }
 }
+
+function onPlayerStateChange() {
+    console.log( "ready!" );
+  };
+
+$( document ).ready(function() {
+    var player;
+function onYouTubeIframeAPIReady() {
+  player = new YT.Player('player1', {
+    events: {
+      'onStateChange': onPlayerStateChange
+    }
+  });
+}
+});
