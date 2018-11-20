@@ -42,7 +42,6 @@ function onPlayerStateChange(currentPlyaer) {
         }
     }
 };
-
 var players = new Array();
 function onYouTubeIframeAPIReady() {
     var i = 0;
