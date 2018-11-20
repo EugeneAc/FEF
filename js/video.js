@@ -54,8 +54,7 @@ function onPlayerStateChange() {
     console.log( "ready!" );
   };
 
-$( document ).ready(function() {
-    var player;
+var player;
 function onYouTubeIframeAPIReady() {
   player = new YT.Player('player1', {
     events: {
@@ -63,4 +62,4 @@ function onYouTubeIframeAPIReady() {
     }
   });
 }
-});
+
