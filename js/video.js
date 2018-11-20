@@ -39,7 +39,7 @@ function showVideoListChannel(channelid, writediv, maxnumbervideos, apikey) {
             }
             var videothumbnail = videos[i].snippet.thumbnails.default.url; // default, medium or high
             content += "<div class='gallery-flex-item'>"
-                + "<iframe id='player" + i + "' src='https://www.youtube.com/embed/" + videoid + "?enablejsapi=1&origin=https://qwerty11aa.github.io/FEF/' frameborder='0' allow='picture-in-picture;'>"
+                + "<iframe id='player" + i + "' src='https://www.youtube.com/embed/" + videoid + "?enablejsapi=1&origin=https://qwerty11aa.github.io' frameborder='0' allow='picture-in-picture;'>"
                 + "</iframe>"
                 + "</div>";
         }
