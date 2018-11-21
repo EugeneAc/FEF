@@ -22,7 +22,7 @@ function showVideoListChannel(channelid, writediv, maxnumbervideos, apikey) {
         for (var i = 0; i < videos.length - 1; i++) {
             var videoid = videos[i].id.videoId;
             content += "<div class='gallery-flex-item'>"
-                + "<iframe id='player" + i + "'class='youtube-player' src='https://www.youtube.com/embed/" + videoid + "?enablejsapi=1&html5=1' frameborder='0' allow='picture-in-picture;'>"
+                + "<iframe id='" + i + "'class='youtube-video' src='https://www.youtube.com/embed/" + videoid + "?enablejsapi=1&html5=1' frameborder='0' allow='picture-in-picture;'>"
                 + "</iframe>"
                 + "</div>";
         }
@@ -33,25 +33,36 @@ function showVideoListChannel(channelid, writediv, maxnumbervideos, apikey) {
     }
 }
 
-function onPlayerStateChange(currentPlyaer) {
-    for (var i = 0; i < players.length; i++) {
-        var test = players[i].getPlayerState()
-        if (players[i].getPlayerState() = 1)
-        {
-            players[i].stopVideo();
-        }
-    }
-};
-var players = new Array();
-function onYouTubeIframeAPIReady() {
-    var i = 0;
-    $('.youtube-player').each(function(){
-        test = this;
-        players[i] = new YT.Player(this.id, {
-            events: {
-                'onStateChange': onPlayerStateChange(this)
-            }   
+var tag = document.createElement('script');
+
+tag.src = "https://www.youtube.com/iframe_api";
+var firstScriptTag = document.getElementsByTagName('script')[0];
+firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+players = new Array();
+window.onYouTubeIframeAPIReady = function(){
+    var i=0;
+        $('.youtube-video').each(
+  function() {
+    players[i] = new YT.Player($(this).attr('id'), 
+    { 
+      videoId: $(this).attr('id'), 
+      events: { 'onStateChange': onPlayerStateChange($(this).attr('id')) }
     });
-    i++;    
+    i++;
   });
-}
+};
+
+    function onPlayerStateChange(player_id){
+        return function(event) {
+            players.forEach(function(item, i, players) {
+                var palyerState = players[i].getPlayerState();
+                var currentPlayerState = players[player_id].getPlayerState();
+                if(palyerState == 1 && currentPlayerState == 1 && i!=player_id) {
+                    //stop the video
+                    console.log("stop video" + player_id);
+                    players[i].stopVideo()
+                }
+                });
+            }
+    }
