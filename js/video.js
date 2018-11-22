@@ -22,7 +22,7 @@ function showVideoListChannel(channelid, writediv, maxnumbervideos, apikey) {
         for (var i = 0; i < videos.length - 1; i++) {
             var videoid = videos[i].id.videoId;
             content += "<div class='gallery-flex-item'>"
-                + "<iframe id='" + i + "'class='youtube-video' src='https://www.youtube.com/embed/" + videoid + "?enablejsapi=1&html5=1' frameborder='0' allow='picture-in-picture;'>"
+                + "<iframe data-arrayIndex='"+i+"' id='" + i + "'class='youtube-video' src='https://www.youtube.com/embed/" + videoid + "?enablejsapi=1&html5=1' frameborder='0' allow='picture-in-picture;'>"
                 + "</iframe>"
                 + "</div>";
         }
@@ -47,20 +47,20 @@ window.onYouTubeIframeAPIReady = function(){
     players[i] = new YT.Player($(this).attr('id'), 
     { 
       videoId: $(this).attr('id'), 
-      events: { 'onStateChange': onPlayerStateChange($(this).attr('id')) }
+      events: { 'onStateChange': onPlayerStateChange($(this).data('arrayIndex')) }
     });
     i++;
   });
 };
 
-    function onPlayerStateChange(player_id){
+    function onPlayerStateChange(player_index){
         return function(event) {
             players.forEach(function(item, i, players) {
                 var palyerState = players[i].getPlayerState();
-                var currentPlayerState = players[player_id].getPlayerState();
-                if(palyerState == 1 && currentPlayerState == 1 && i!=player_id) {
+                var currentPlayerState = players[player_index].getPlayerState();
+                if(palyerState == 1 && currentPlayerState == 1 && i!=player_index) {
                     //stop the video
-                    console.log("stop video" + player_id);
+                    console.log("stop video" + player_index);
                     players[i].stopVideo()
                 }
                 });
