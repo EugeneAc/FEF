@@ -22,7 +22,7 @@ function showVideoListChannel(channelid, writediv, maxnumbervideos, apikey) {
         for (var i = 0; i < videos.length - 1; i++) {
             var videoid = videos[i].id.videoId;
             content += "<div class='gallery-flex-item'>"
-                + "<iframe data-arrayIndex='"+i+"' id='" + i + "'class='youtube-video' src='https://www.youtube.com/embed/" + videoid + "?enablejsapi=1&html5=1' frameborder='0' allow='picture-in-picture;'>"
+                + "<iframe data-array-index='"+i+"' id='Player" + i + "'class='youtube-video' src='https://www.youtube.com/embed/" + videoid + "?enablejsapi=1&html5=1' frameborder='0' allow='picture-in-picture;'>"
                 + "</iframe>"
                 + "</div>";
         }
@@ -44,10 +44,10 @@ window.onYouTubeIframeAPIReady = function(){
     var i=0;
         $('.youtube-video').each(
   function() {
-    players[i] = new YT.Player($(this).attr('id'), 
+    players[i] = new YT.Player($(this).data('arrayIndex'), 
     { 
       videoId: $(this).attr('id'), 
-      events: { 'onStateChange': onPlayerStateChange($(this).data('arrayIndex')) }
+      events: { 'onStateChange': onPlayerStateChange(id) }
     });
     i++;
   });
@@ -59,8 +59,6 @@ window.onYouTubeIframeAPIReady = function(){
                 var palyerState = players[i].getPlayerState();
                 var currentPlayerState = players[player_index].getPlayerState();
                 if(palyerState == 1 && currentPlayerState == 1 && i!=player_index) {
-                    //stop the video
-                    console.log("stop video" + player_index);
                     players[i].stopVideo()
                 }
                 });
