@@ -44,10 +44,10 @@ window.onYouTubeIframeAPIReady = function(){
     var i=0;
         $('.youtube-video').each(
   function() {
-    players[i] = new YT.Player($(this).data('arrayIndex'), 
+    players[i] = new YT.Player($(this).attr('id'), 
     { 
       videoId: $(this).attr('id'), 
-      events: { 'onStateChange': onPlayerStateChange(id) }
+      events: { 'onStateChange': onPlayerStateChange($(this).data('arrayIndex')) }
     });
     i++;
   });
