@@ -105,6 +105,13 @@ nav a:focus {
 	margin: 10px;
 }
 
+.youtube-video.fixedposition {
+	position: fixed;
+	bottom: 0px;
+	width: 350px;
+	right: 0px;
+}
+
 @media only screen and (max-width: 700px) {
     .gallery-flex-item{ 
         flex-basis: 250px;
