@@ -1,0 +1,28 @@
+{
+  "name": "FEF",
+  "version": "1.0.0",
+  "description": "You can use the [editor on GitHub](https://github.com/qwerty11aa/FEF/edit/gh-pages/README.md) to maintain and preview the content for your website in Markdown files.",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {
+    "webpack": "^4.27.1",
+    "webpack-cli": "^3.1.2"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "develop": "webpack --mode development --watch",
+    "build": "webpack --mode production"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/qwerty11aa/FEF.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/qwerty11aa/FEF/issues"
+  },
+  "homepage": "https://github.com/qwerty11aa/index.html"
+
+}
