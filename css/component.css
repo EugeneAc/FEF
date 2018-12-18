@@ -112,6 +112,18 @@ nav a:focus {
 	right: 0px;
 }
 
+.nav-pills .nav-link.active{
+	border-style: solid;
+	border-width: 2px;
+	background-color: transparent;
+	border-radius: .25rem;
+	border-color: white;
+}
+
+.nav-link{
+	padding: 10px !important;
+}
+
 @media only screen and (max-width: 700px) {
     .gallery-flex-item{ 
         flex-basis: 250px;
